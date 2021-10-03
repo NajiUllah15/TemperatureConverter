@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Temperature Converter</title>
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bitter&family=Oxygen:wght@300&
+         family=Quicksand:wght@500&family=Signika+Negative:wght@300&family=Zilla+Slab:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- FavIcon -->
+
+    <link rel="shortcut icon" href="2100100.png" type="image/png" />
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Quicksand';
+        color: #161515b9;
+
+        background-color: #334756;
+        overflow: hidden;
+      }
+
+      .container {
+        background-color: #334756;
+        width: 100%;
+        height: 87vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .header {
+        font-size: 1.6rem;
+        font-weight: bolder;
+        text-align: center;
+        line-height: 100px;
+        color: #d69f07f8;
+        font-family: 'Balsamiq Sans', cursive;
+        /* border: 2px solid red; */
+        position: relative;
+        z-index: 2333;
+      }
+
+      .header::before {
+        content: '';
+        position: absolute;
+        top: 34%;
+        left: 0%;
+        bottom: 0;
+        right: 0;
+        background-color: #334756;
+
+        /* border-left: 2px solid black; */
+        width: 23%;
+        height: 1.8rem;
+        animation: animate 5s steps(23) forwards;
+      }
+      .header::after {
+        content: '';
+        position: absolute;
+        top: 34%;
+        left: 38%;
+        bottom: 0;
+        right: 0;
+
+        background-color: rgb(233, 217, 217);
+        width: 0.134rem;
+        height: 2rem;
+        animation: animate 5s steps(23) forwards, blink 5s steps(23) forwards;
+      }
+
+      @keyframes animate {
+        from {
+          left: 38%;
+        }
+        to {
+          left: 61%;
+        }
+      }
+
+      @keyframes blink {
+        to {
+          background-color: transparent;
+        }
+      }
+
+      .box {
+        width: 24rem;
+        height: 375px;
+
+        transform: translateY(-60px);
+        border: none;
+        box-shadow: 0px 30px 30px #1c1c1d;
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        background-color: #082032;
+        /* cursor: none; */
+      }
+
+      .text {
+        width: 100%;
+        background-color: #f0a500;
+        box-shadow: 0px 3px 14px rgba(59, 57, 57, 0.911);
+        height: 47px;
+        font-family: 'Quicksand';
+        letter-spacing: 3px;
+        color: rgb(0, 0, 0);
+        font-size: 1.2rem;
+        font-weight: bolder;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        text-align: center;
+        display: inline-block;
+        border: 2px solid rgba(230, 225, 225, 0.356);
+        line-height: 40px;
+      }
+
+      .form {
+        margin: 6.9rem 2.78rem;
+        /* border: 2px solid rgb(236, 0, 0); */
+        padding: 10px;
+        width: 80%;
+      }
+
+      /*Extras hiding the numver increases */
+
+      /* Chrome, Safari, Edge, Opera */
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Firefox */
+      input[type='number'] {
+        -moz-appearance: textfield;
+      }
+
+      #number {
+        width: 160px;
+        height: 30px;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        border-bottom: 1px solid #b1b6b1c5;
+        padding-left: 5px;
+        font-family: 'Quicksand';
+        color: white;
+
+        transition: border-bottom 100ms linear;
+      }
+
+      #number:focus {
+        border-bottom: 1px solid #f0a500;
+      }
+
+      .error {
+        width: 57%;
+        height: 20px;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        border-bottom: 1px solid #07290734;
+        padding-left: 5px;
+        font-family: 'Quicksand';
+        font-size: 12px;
+        color: #c91d1d;
+        position: fixed;
+        top: 183px;
+        left: 19%;
+        transition: border-bottom 100ms linear;
+        display: inline-block;
+        text-align: center;
+      }
+
+      #selectBox {
+        width: 109px;
+        height: auto;
+        border: none;
+        margin-left: 15px;
+        background-color: transparent;
+        padding: 7px 10px 8px 5px;
+        font-family: 'Quicksand';
+        color: white;
+        outline: 1px solid #f0f0f02c;
+        border-radius: 3px;
+        position: absolute;
+        top: 124px;
+        right: 33px;
+      }
+
+      #select-Box:hover {
+        cursor: pointer;
+      }
+      .option {
+        background-color: #082032;
+      }
+
+      .result-box {
+        width: 60%;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+
+        margin-top: -31px;
+        margin-inline: 57px;
+        color: white;
+        /* outline: 1px solid #c4930dad; */
+        border-radius: 24px;
+        padding: 9px 14px;
+      }
+
+      .result {
+        font-family: 'Quicksand';
+        /* width: 200px; */
+        color: #f0a500;
+      }
+
+      #formula {
+        font-family: 'Quicksand';
+        font-size: 12px;
+        text-align: center;
+        width: 100%;
+        height: auto;
+        transform: translate(-8px, 19px);
+        color: rgba(172, 168, 168, 0.705);
+      }
+      .heading {
+        color: rgba(247, 247, 245, 0.667);
+
+        margin: 0px 9px;
+      }
+
+      #convert {
+        display: inline-block;
+        width: 120px;
+        height: 35px;
+        background-color: transparent;
+        border: 1px solid #f0a500;
+        border-radius: 20px;
+        outline: none;
+        padding: 3px;
+        transform: translate(76px, 56px);
+        color: #f0a500;
+        transition: all 0.2s;
+        text-transform: capitalize;
+        font-family: 'Quicksand';
+      }
+
+      .btns {
+        transform: translate(-12px, 27px);
+      }
+
+      #convert:hover {
+        color: white;
+        background-color: #f0a500;
+        border: none;
+        cursor: pointer;
+        font-weight: bolder;
+      }
+
+      /***************  Media Queries *****************/
+
+      @media only screen and (max-width: 430px) {
+        .box {
+          width: 22rem;
+          height: 370px;
+
+          transform: translateY(-60px);
+          border: none;
+          box-shadow: 0px 30px 30px #1c1c1d;
+          position: relative;
+          border-radius: 20px;
+          overflow: hidden;
+          background-color: #082032;
+          /* cursor: none; */
+        }
+
+        #select-Box {
+          width: 69px;
+          transform: scale(1) translateX(10px);
+          height: 33px;
+          border: none;
+          background-color: transparent;
+          padding: 7px 0px 8px 5px;
+          font-family: 'Quicksand';
+          color: white;
+          outline: 1px solid #f0f0f02c;
+          border-radius: 3px;
+          position: absolute;
+          top: 124px;
+          right: 23px;
+        }
+        .form {
+          margin: 6.9rem 3.98rem;
+          /* border: 2px solid rgb(236, 0, 0); */
+          padding: 10px;
+          width: 80%;
+        }
+
+        #number {
+          transform: translateX(-43px);
+          width: 160px;
+          height: 30px;
+          border: none;
+          outline: none;
+          background-color: transparent;
+          border-bottom: 1px solid #b1b6b1c5;
+          padding-left: 5px;
+          font-family: 'Quicksand';
+          color: white;
+          position: relative;
+          transition: border-bottom 100ms linear;
+        }
+
+        .header::before {
+          content: '';
+          position: absolute;
+          top: 34%;
+          left: 0%;
+          bottom: 0;
+          right: 0;
+          background-color: #33475600;
+
+          /* border-left: 2px solid black; */
+          width: 23%;
+          height: 1.8rem;
+          animation: none;
+        }
+        .header::after {
+          content: '';
+          position: absolute;
+          top: 34%;
+          left: 38%;
+          bottom: 0;
+          right: 0;
+
+          background-color: rgba(233, 217, 217, 0);
+          width: 0.134rem;
+          height: 2rem;
+          animation: none;
+        }
+
+        #convert {
+          /* border: 2px solid red; */
+          transform: translate(73px, 70px);
+          width: 89px;
+          height: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">Temperature Converter</div>
+
+    <div class="container">
+      <div class="box">
+        <span class="text">Enter the Value</span>
+        <div class="form">
+          <label for="number"></label>
+          <input type="number" name="" id="number" placeholder="Enter" />
+
+          <select value="Select" id="selectBox">
+            <option id="option-Box" class="option">Select</option>
+            <option name="Celsius" class="option-1 option">Celsius</option>
+            <option name="Fahrenheit" class="option-2 option">
+              Fahrenheit
+            </option>
+          </select>
+          <span class="error"> </span>
+          <div class="btns">
+            <button id="convert">convert</button>
+          </div>
+        </div>
+
+        <div class="result-box">
+          <span class="heading"></span>
+          <span class="result"> &nbsp;</span>
+        </div>
+        <p id="formula">&nbsp;</p>
+      </div>
+    </div>
+
+    <script src="scirpt.js"></script>
+  </body>
+</html>
